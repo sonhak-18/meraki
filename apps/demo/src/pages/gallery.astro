@@ -4,18 +4,20 @@ import Header from "@sage/components/Header.astro";
 import Main from "@sage/components/Main.astro";
 import Footer from "@sage/components/Footer.astro";
 import config from "@sage/config";
+import { getCollection } from "astro:content";
 
-// Data potret kenangan berdua
-const photos = [
-  {
-    title: "Senja dan Percakapan Panjang",
-    date: "14 Oktober 2026",
-    location: "Tepi Dermaga",
-    caption: "Matahari perlahan tenggelam, tapi obrolan tentang impian dan hari esok rasanya tidak pernah ingin selesai.",
-    // Placeholder foto bernuansa hangat
-    gradient: "from-[#df8968] via-[#cb6b51] to-[#7f3928]",
-    aspect: "aspect-4/3",
-  },
+interface PhotoItem {
+  title: string;
+  date: string;
+  location: string;
+  caption: string;
+  aspect: string;
+  image?: string;
+  gradient: string;
+}
+
+// Potret default untuk ilustrasi awal
+const defaultPhotos: PhotoItem[] = [
   {
     title: "Secangkir Kopi Saat Hujan",
     date: "28 September 2026",
@@ -41,6 +43,24 @@ const photos = [
     aspect: "aspect-square",
   },
 ];
+
+let dynamicPhotos: PhotoItem[] = [];
+try {
+  const entries = await getCollection("gallery");
+  dynamicPhotos = entries.map(entry => ({
+    title: entry.data.title,
+    date: String(entry.data.date),
+    location: entry.data.location || "Suatu Tempat",
+    caption: entry.data.caption || "",
+    aspect: entry.data.aspect || "aspect-4/3",
+    image: entry.data.image,
+    gradient: "from-[#df8968] via-[#cb6b51] to-[#7f3928]",
+  }));
+} catch {
+  dynamicPhotos = [];
+}
+
+const displayPhotos: PhotoItem[] = dynamicPhotos.length > 0 ? [...dynamicPhotos, ...defaultPhotos] : defaultPhotos;
 ---
 
 <Layout
@@ -54,12 +74,20 @@ const photos = [
     pageDesc="Kumpulan bingkai visual dan memori perjalanan yang kami rawat berdua."
   >
     <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {photos.map(photo => (
+      {displayPhotos.map(photo => (
         <article class="photo-card group overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--bg)] transition-all duration-300 hover:border-[var(--accent)] hover:shadow-md">
           <div class={`relative ${photo.aspect} w-full overflow-hidden bg-gradient-to-br ${photo.gradient} p-4 flex flex-col justify-end text-white`}>
-            <div class="absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/10" />
+            {photo.image ? (
+              <img
+                src={photo.image}
+                alt={photo.title}
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            ) : null}
+            <div class="absolute inset-0 bg-black/25 transition-opacity duration-300 group-hover:bg-black/15" />
             <div class="relative z-10">
-              <span class="inline-block rounded-md bg-black/40 px-2.5 py-1 text-xs font-mono tracking-wider backdrop-blur-xs text-white/90">
+              <span class="inline-block rounded-md bg-black/50 px-2.5 py-1 text-xs font-mono tracking-wider backdrop-blur-xs text-white/90">
                 {photo.location}
               </span>
             </div>
@@ -85,8 +113,6 @@ const photos = [
     <div class="mt-12 rounded-xl border border-dashed border-[var(--border)] p-6 text-center">
       <p class="text-sm text-[var(--fg-muted)]">
         Foto-foto baru dapat diunggah langsung melalui dashboard 
-        <a href="/keystatic" class="text-[var(--accent)] font-medium underline underline-offset-4 hover:opacity-80">Keystatic</a> 
-        atau 
         <a href="/admin" class="text-[var(--accent)] font-medium underline underline-offset-4 hover:opacity-80">CMS Admin</a>.
       </p>
     </div>

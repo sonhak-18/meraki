@@ -15,6 +15,7 @@ collections:
     fields:
       - { label: "Judul", name: "title", widget: "string" }
       - { label: "Deskripsi", name: "description", widget: "text" }
+      - { label: "Foto Sampul / Banner", name: "ogImage", widget: "image", required: false }
       - { label: "Tanggal", name: "pubDatetime", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ" }
       - { label: "Penulis", name: "author", widget: "string", default: "Kita" }
       - label: "Tag / Kategori"
@@ -31,3 +32,23 @@ collections:
       - { label: "Featured di Beranda", name: "featured", widget: "boolean", default: false, required: false }
       - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
       - { label: "Isi Tulisan", name: "body", widget: "markdown" }
+
+  - name: gallery
+    label: "Galeri Potret Kenangan"
+    folder: apps/demo/src/content/gallery
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Judul Momen", name: "title", widget: "string" }
+      - { label: "Tanggal Momen", name: "date", widget: "string", hint: "Contoh: 14 Oktober 2026 atau 2026-10-14" }
+      - { label: "Lokasi", name: "location", widget: "string", default: "Rumah" }
+      - { label: "Foto", name: "image", widget: "image", hint: "Pilih foto dari komputer/HP atau media library" }
+      - { label: "Catatan Momen", name: "caption", widget: "text", hint: "Cerita singkat di balik foto ini" }
+      - label: "Rasio Tampilan"
+        name: "aspect"
+        widget: "select"
+        options:
+          - { label: "Standar Foto (4:3)", value: "aspect-4/3" }
+          - { label: "Persegi (1:1)", value: "aspect-square" }
+          - { label: "Layar Lebar (16:9)", value: "aspect-video" }
+        default: "aspect-4/3"
