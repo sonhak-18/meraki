@@ -21,9 +21,16 @@ export default config({
           label: "Tanggal Publikasi",
           defaultValue: { kind: "today" },
         }),
-        tags: fields.array(fields.text({ label: "Tag / Kategori" }), {
-          label: "Tag (misal: cinta, personal, project, foto)",
-          itemLabel: props => props.value || "Tag",
+        tags: fields.multiselect({
+          label: "Tag / Kategori",
+          options: [
+            { label: "Cinta (Kisah Kita Berdua)", value: "cinta" },
+            { label: "Personal (Catatan Hidup)", value: "personal" },
+            { label: "Project (Karya & Teknologi)", value: "project" },
+            { label: "Foto (Potret & Galeri)", value: "foto" },
+            { label: "Refleksi (Renungan)", value: "refleksi" },
+          ],
+          defaultValue: ["cinta"],
         }),
         featured: fields.checkbox({
           label: "Tampilkan di Beranda (Featured)",
