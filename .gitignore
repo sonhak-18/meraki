@@ -41,3 +41,17 @@ apps/*/playwright-report/
 # sage cache
 .sage-cache/
 apps/*/.sage-cache/
+
+# Google Cloud Service Accounts (Private Keys)
+serviceaccounts.json
+**/serviceaccounts.json
+sa*.json
+**/sa*.json
+!serviceaccounts.example.json
+!**/serviceaccounts.example.json
+
+# Private Worker Config
+private-config.json
+**/private-config.json
+!private-config.example.json
+!**/private-config.example.json
