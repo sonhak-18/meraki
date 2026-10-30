@@ -1,5 +1,5 @@
 {
-  "name": "astro-sage-monorepo",
+  "name": "meraki",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.34.7",
@@ -17,6 +17,7 @@
     "test": "pnpm --filter astro-sage test && pnpm --filter @astro-sage/demo test",
     "changeset": "changeset",
     "version-packages": "changeset version && pnpm install --lockfile-only",
+    "deploy": "pnpm build && pnpm --filter @astro-sage/demo exec wrangler deploy",
     "deploy:demo": "pnpm build && pnpm --filter @astro-sage/demo exec wrangler deploy"
   },
   "devDependencies": {
