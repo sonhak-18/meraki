@@ -37,3 +37,7 @@ apps/*/.astro/
 .wrangler/
 apps/*/test-results/
 apps/*/playwright-report/
+
+# sage cache
+.sage-cache/
+apps/*/.sage-cache/

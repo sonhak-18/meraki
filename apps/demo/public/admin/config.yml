@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: sonhak-18/meraki
+  branch: main
+
+media_folder: apps/demo/public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: posts
+    label: "Kisah & Tulisan"
+    folder: apps/demo/src/content/posts
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Deskripsi", name: "description", widget: "text" }
+      - { label: "Tanggal", name: "pubDatetime", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ" }
+      - { label: "Penulis", name: "author", widget: "string", default: "Kita" }
+      - { label: "Tag / Kategori", name: "tags", widget: "list", default: ["cinta"] }
+      - { label: "Featured di Beranda", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+      - { label: "Isi Tulisan", name: "body", widget: "markdown" }

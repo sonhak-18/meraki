@@ -28,6 +28,7 @@ const hasSeries = (await getCollection("posts")).some(
 const links = [
   { path: "/posts", label: t.nav.posts },
   ...(hasSeries ? [{ path: "/series", label: t.nav.series }] : []),
+  { path: "/gallery", label: "Galeri" },
   { path: "/tags", label: t.nav.tags },
   ...(features.showArchives
     ? [{ path: "/archives", label: t.nav.archives }]
@@ -48,9 +49,12 @@ const links = [
   <div class="border-border flex items-center justify-between gap-6 border-b py-5 sm:py-6">
     <a
       href={getRelativeLocaleUrl(locale, "")}
-      class="site-title text-xl font-semibold whitespace-nowrap sm:text-2xl"
+      class="site-title flex items-baseline gap-1.5 text-xl font-semibold whitespace-nowrap sm:text-2xl group"
     >
-      {site.title}
+      <span>{site.title}</span>
+      <span class="greek-badge font-serif text-xs sm:text-sm font-normal tracking-wider opacity-75 group-hover:opacity-100 group-hover:text-[var(--accent)] transition-all">
+        (Μεράκι)
+      </span>
     </a>
 
     <nav aria-label="Main" class="flex items-center gap-1 sm:gap-2">
@@ -119,6 +123,9 @@ const links = [
   .site-title {
     font-variation-settings: "opsz" 40;
     letter-spacing: -0.01em;
+  }
+  .greek-badge {
+    color: var(--accent);
   }
   .nav-link {
     color: var(--fg-muted);

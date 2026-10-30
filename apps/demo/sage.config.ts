@@ -2,28 +2,24 @@ import { defineSageConfig } from "astro-sage";
 
 export default defineSageConfig({
   site: {
-    url: "https://astro-sage.chintak.sh/",
-    title: "AstroSage",
+    url: "https://meraki-blog.pages.dev/",
+    title: "Meraki",
     description:
-      "A readability-first Astro blog theme: serif type, warm paper, and a pinned table of contents.",
-    author: "Ada Lovelace",
-    profile: "https://example.com",
+      "Arsip kisah cinta kita berdua, catatan hidup, karya, dan potret momen berharga.",
+    author: "Kita",
+    profile: "https://meraki-blog.pages.dev/about",
     ogImage: "default-og.jpg",
-    lang: "en",
-    timezone: "UTC",
+    lang: "id",
+    timezone: "Asia/Jakarta",
     dir: "ltr",
   },
   home: {
-    title: "AstroSage",
+    title: "Meraki (Μεράκι)",
     intro:
-      "A quiet, warm theme for long-form technical writing. Serif type set for reading, math and code that look like they belong, and a table of contents that keeps its place.",
+      "Ruang hangat untuk merawat kisah cinta kita berdua, catatan perjalanan hidup, hal-hal yang sedang kita bangun, dan potret memori yang tak ingin kita lupakan.",
   },
-  // GitHub-backed comments; works on any static host. Needs the utterances
-  // app installed on the repo: https://github.com/apps/utterances
   comments: {
-    provider: "utterances",
-    repo: "chintak/astro-sage",
-    label: "comments",
+    provider: false,
   },
   posts: { perPage: 8, perIndex: 6, scheduledPostMargin: 15 * 60 * 1000 },
   features: {
@@ -32,15 +28,9 @@ export default defineSageConfig({
     showArchives: true,
     showBackButton: false,
     editPost: {
-      enabled: true,
-      url: "https://github.com/chintak/astro-sage/edit/main/apps/demo/",
+      enabled: false,
     },
     search: "pagefind",
   },
-  socials: [
-    // Sample links: point these at your own profiles.
-    { name: "github", url: "https://github.com" },
-    { name: "x", url: "https://x.com" },
-  ],
-  // shareLinks: defaults to X, LinkedIn, Bluesky, Reddit, Hacker News and email.
+  socials: [],
 });

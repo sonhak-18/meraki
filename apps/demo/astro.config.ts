@@ -1,9 +1,17 @@
 import { defineConfig } from "astro/config";
+import react from "@astrojs/react";
+import keystatic from "@keystatic/astro";
 import astroSage from "astro-sage";
 import sageConfig from "./sage.config";
 
-// A fully static site: `astro build` writes plain files to dist/ for any host.
+const isDev = process.argv.includes("dev");
+
+// Konfigurasi Astro Meraki (Static output + Keystatic GUI saat dev)
 export default defineConfig({
   site: sageConfig.site.url,
-  integrations: [astroSage(sageConfig)],
+  integrations: [
+    react(),
+    ...(isDev ? [keystatic()] : []),
+    astroSage(sageConfig),
+  ],
 });

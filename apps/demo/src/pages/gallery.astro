@@ -1,0 +1,105 @@
+---
+import Layout from "@sage/layouts/Layout.astro";
+import Header from "@sage/components/Header.astro";
+import Main from "@sage/components/Main.astro";
+import Footer from "@sage/components/Footer.astro";
+import config from "@sage/config";
+
+// Data potret kenangan berdua
+const photos = [
+  {
+    title: "Senja dan Percakapan Panjang",
+    date: "14 Oktober 2026",
+    location: "Tepi Dermaga",
+    caption: "Matahari perlahan tenggelam, tapi obrolan tentang impian dan hari esok rasanya tidak pernah ingin selesai.",
+    // Placeholder foto bernuansa hangat
+    gradient: "from-[#df8968] via-[#cb6b51] to-[#7f3928]",
+    aspect: "aspect-4/3",
+  },
+  {
+    title: "Secangkir Kopi Saat Hujan",
+    date: "28 September 2026",
+    location: "Sudut Kedai Kecil",
+    caption: "Kaca kafe berembun karena hujan lebat di luar. Menulis catatan kecil sambil mendengarkan ceritamu.",
+    gradient: "from-[#8c6d58] via-[#634835] to-[#3a271c]",
+    aspect: "aspect-square",
+  },
+  {
+    title: "Meja Kerja & Dua Layar",
+    date: "12 September 2026",
+    location: "Studio Rumah",
+    caption: "Kamu sibuk membaca buku referensi, aku mengetik baris kode pertama untuk blog Meraki ini.",
+    gradient: "from-[#5b7065] via-[#3d5047] to-[#25332c]",
+    aspect: "aspect-4/3",
+  },
+  {
+    title: "Buku, Bunga, dan Pagi yang Tenang",
+    date: "30 Agustus 2026",
+    location: "Taman Kota",
+    caption: "Tidak ada target yang harus dicapai hari itu. Hanya duduk beralas rumput dan menikmati udara sejuk berdua.",
+    gradient: "from-[#d2b17b] via-[#a8824f] to-[#6c4f2b]",
+    aspect: "aspect-square",
+  },
+];
+---
+
+<Layout
+  title={`Galeri Foto | ${config.site.title}`}
+  description="Kumpulan bingkai visual dari momen-momen yang kami lewati berdua."
+>
+  <Header />
+
+  <Main
+    pageTitle="Galeri & Potret"
+    pageDesc="Kumpulan bingkai visual dan memori perjalanan yang kami rawat berdua."
+  >
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {photos.map(photo => (
+        <article class="photo-card group overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--bg)] transition-all duration-300 hover:border-[var(--accent)] hover:shadow-md">
+          <div class={`relative ${photo.aspect} w-full overflow-hidden bg-gradient-to-br ${photo.gradient} p-4 flex flex-col justify-end text-white`}>
+            <div class="absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/10" />
+            <div class="relative z-10">
+              <span class="inline-block rounded-md bg-black/40 px-2.5 py-1 text-xs font-mono tracking-wider backdrop-blur-xs text-white/90">
+                {photo.location}
+              </span>
+            </div>
+          </div>
+          
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-[var(--fg-muted)] font-mono">
+              <time datetime={photo.date}>{photo.date}</time>
+            </div>
+            
+            <h2 class="mt-2 text-lg font-serif font-semibold tracking-tight text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
+              {photo.title}
+            </h2>
+            
+            <p class="mt-2 text-sm leading-relaxed text-[var(--fg-muted)]">
+              {photo.caption}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12 rounded-xl border border-dashed border-[var(--border)] p-6 text-center">
+      <p class="text-sm text-[var(--fg-muted)]">
+        Foto-foto baru dapat diunggah langsung melalui dashboard 
+        <a href="/keystatic" class="text-[var(--accent)] font-medium underline underline-offset-4 hover:opacity-80">Keystatic</a> 
+        atau 
+        <a href="/admin" class="text-[var(--accent)] font-medium underline underline-offset-4 hover:opacity-80">CMS Admin</a>.
+      </p>
+    </div>
+  </Main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .photo-card {
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .photo-card:hover {
+    transform: translateY(-2px);
+  }
+</style>

@@ -131,7 +131,7 @@ export async function renderOgImage({
           },
         ],
       },
-    },
+    } as any,
     { width: 1200, height: 630, fonts: await loadFonts() }
   );
   const png = await sharp(Buffer.from(svg)).png().toBuffer();
